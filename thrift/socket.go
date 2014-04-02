@@ -24,7 +24,7 @@ import (
 	"time"
 )
 
-type TSocket struct {
+type TSocket struct { // TSocket结构代表client端socket连接
 	conn    net.Conn
 	addr    net.Addr
 	timeout time.Duration

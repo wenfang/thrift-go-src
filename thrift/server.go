@@ -19,7 +19,7 @@
 
 package thrift
 
-type TServer interface {
+type TServer interface { // server接口
 	ProcessorFactory() TProcessorFactory
 	ServerTransport() TServerTransport
 	InputTransportFactory() TTransportFactory

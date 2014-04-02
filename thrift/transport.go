@@ -31,7 +31,7 @@ type Flusher interface {
 }
 
 // Encapsulates the I/O layer
-type TTransport interface {
+type TTransport interface { // transport接口
 	io.ReadWriteCloser
 	Flusher
 

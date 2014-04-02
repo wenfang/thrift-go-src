@@ -24,11 +24,11 @@ import (
 	"time"
 )
 
-type TServerSocket struct {
+type TServerSocket struct { // 服务端socket，实现了TServerTransport接口
 	listener      net.Listener
 	addr          net.Addr
 	clientTimeout time.Duration
-	interrupted   bool
+	interrupted   bool    // 标志位，当置位时表示应该打断当前堵塞的accept和listen
 }
 
 func NewTServerSocket(listenAddr string) (*TServerSocket, error) {
@@ -70,7 +70,7 @@ func (p *TServerSocket) Accept() (TTransport, error) {
 }
 
 // Checks whether the socket is listening.
-func (p *TServerSocket) IsListening() bool {
+func (p *TServerSocket) IsListening() bool { // 检查server socket是否处于listen状态
 	return p.listener != nil
 }
 

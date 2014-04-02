@@ -28,7 +28,7 @@ type TSimpleServer struct {
 	stopped bool
 
 	processorFactory       TProcessorFactory
-	serverTransport        TServerTransport
+	serverTransport        TServerTransport   // server端的transport
 	inputTransportFactory  TTransportFactory
 	outputTransportFactory TTransportFactory
 	inputProtocolFactory   TProtocolFactory
@@ -67,7 +67,7 @@ func NewTSimpleServerFactory2(processorFactory TProcessorFactory, serverTranspor
 	)
 }
 
-func NewTSimpleServerFactory4(processorFactory TProcessorFactory, serverTransport TServerTransport, transportFactory TTransportFactory, protocolFactory TProtocolFactory) *TSimpleServer {
+func NewTSimpleServerFactory4(processorFactory TProcessorFactory, serverTransport TServerTransport, transportFactory TTransportFactory, protocolFactory TProtocolFactory) *TSimpleServer { // transportFactory和protocolFactory相同
 	return NewTSimpleServerFactory6(processorFactory,
 		serverTransport,
 		transportFactory,
@@ -77,14 +77,14 @@ func NewTSimpleServerFactory4(processorFactory TProcessorFactory, serverTranspor
 	)
 }
 
-func NewTSimpleServerFactory6(processorFactory TProcessorFactory, serverTransport TServerTransport, inputTransportFactory TTransportFactory, outputTransportFactory TTransportFactory, inputProtocolFactory TProtocolFactory, outputProtocolFactory TProtocolFactory) *TSimpleServer {
+func NewTSimpleServerFactory6(processorFactory TProcessorFactory, serverTransport TServerTransport, inputTransportFactory TTransportFactory, outputTransportFactory TTransportFactory, inputProtocolFactory TProtocolFactory, outputProtocolFactory TProtocolFactory) *TSimpleServer { // 最终都会归结为对NewTSimpleServerFactory6的调用
 	return &TSimpleServer{processorFactory: processorFactory,
 		serverTransport:        serverTransport,
 		inputTransportFactory:  inputTransportFactory,
 		outputTransportFactory: outputTransportFactory,
 		inputProtocolFactory:   inputProtocolFactory,
 		outputProtocolFactory:  outputProtocolFactory,
-	}
+	} // 分别赋值6个域
 }
 
 func (p *TSimpleServer) ProcessorFactory() TProcessorFactory {
@@ -111,18 +111,18 @@ func (p *TSimpleServer) OutputProtocolFactory() TProtocolFactory {
 	return p.outputProtocolFactory
 }
 
-func (p *TSimpleServer) Serve() error {
+func (p *TSimpleServer) Serve() error { // 启动server执行服务
 	p.stopped = false
-	err := p.serverTransport.Listen()
+	err := p.serverTransport.Listen() // 调用serverTransport的listen，开始监听
 	if err != nil {
 		return err
 	}
-	for !p.stopped {
-		client, err := p.serverTransport.Accept()
+	for !p.stopped { // 如果server未停止
+		client, err := p.serverTransport.Accept() // 接收新服务，返回一个对应client端的transport
 		if err != nil {
 			log.Println("Accept err: ", err)
 		}
-		if client != nil {
+		if client != nil { // 如果client非空，创建一个goroutine执行processRequest
 			go func() {
 				if err := p.processRequest(client); err != nil {
 					log.Println("error processing request:", err)
@@ -133,7 +133,7 @@ func (p *TSimpleServer) Serve() error {
 	return nil
 }
 
-func (p *TSimpleServer) Stop() error {
+func (p *TSimpleServer) Stop() error { // 停止server
 	p.stopped = true
 	p.serverTransport.Interrupt()
 	return nil

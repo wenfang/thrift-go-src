@@ -20,9 +20,9 @@
 package thrift
 
 // Server transport. Object which provides client transports.
-type TServerTransport interface {
+type TServerTransport interface { // 服务端的transport接口
 	Listen() error
-	Accept() (TTransport, error)
+	Accept() (TTransport, error) // accept后返回一个用于收发的TTransport
 	Close() error
 
 	// Optional method implementation. This signals to the server transport
