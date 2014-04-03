@@ -26,16 +26,16 @@ import (
 
 type TServerSocket struct { // 服务端socket，实现了TServerTransport接口
 	listener      net.Listener
-	addr          net.Addr
-	clientTimeout time.Duration
-	interrupted   bool    // 标志位，当置位时表示应该打断当前堵塞的accept和listen
+	addr          net.Addr      // 网络监听地址
+	clientTimeout time.Duration // 客户端超时时间
+	interrupted   bool          // 标志位，当置位时表示应该打断当前堵塞的accept和listen
 }
 
-func NewTServerSocket(listenAddr string) (*TServerSocket, error) {
+func NewTServerSocket(listenAddr string) (*TServerSocket, error) { // 创建一个新的TServer socket
 	return NewTServerSocketTimeout(listenAddr, 0)
 }
 
-func NewTServerSocketTimeout(listenAddr string, clientTimeout time.Duration) (*TServerSocket, error) {
+func NewTServerSocketTimeout(listenAddr string, clientTimeout time.Duration) (*TServerSocket, error) { // 加入设置客户端超时
 	addr, err := net.ResolveTCPAddr("tcp", listenAddr)
 	if err != nil {
 		return nil, err
@@ -43,7 +43,7 @@ func NewTServerSocketTimeout(listenAddr string, clientTimeout time.Duration) (*T
 	return &TServerSocket{addr: addr, clientTimeout: clientTimeout}, nil
 }
 
-func (p *TServerSocket) Listen() error {
+func (p *TServerSocket) Listen() error { // 启动Listen
 	if p.IsListening() {
 		return nil
 	}

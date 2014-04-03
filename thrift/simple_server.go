@@ -28,7 +28,7 @@ type TSimpleServer struct {
 	stopped bool
 
 	processorFactory       TProcessorFactory
-	serverTransport        TServerTransport   // server端的transport
+	serverTransport        TServerTransport // server端的transport
 	inputTransportFactory  TTransportFactory
 	outputTransportFactory TTransportFactory
 	inputProtocolFactory   TProtocolFactory
@@ -153,7 +153,7 @@ func (p *TSimpleServer) processRequest(client TTransport) error {
 	}
 	for {
 		ok, err := processor.Process(inputProtocol, outputProtocol)
-		if err, ok := err.(TTransportException); ok && err.TypeId() == END_OF_FILE{
+		if err, ok := err.(TTransportException); ok && err.TypeId() == END_OF_FILE {
 			return nil
 		} else if err != nil {
 			return err

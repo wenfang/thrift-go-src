@@ -24,7 +24,7 @@ const (
 	VERSION_1    = 0x80010000
 )
 
-type TProtocol interface {
+type TProtocol interface { // TProtocol协议接口
 	WriteMessageBegin(name string, typeId TMessageType, seqid int32) error
 	WriteMessageEnd() error
 	WriteStructBegin(name string) error
