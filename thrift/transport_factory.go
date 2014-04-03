@@ -30,10 +30,10 @@ type TTransportFactory interface {
 type tTransportFactory struct{}
 
 // Return a wrapped instance of the base Transport.
-func (p *tTransportFactory) GetTransport(trans TTransport) TTransport {
+func (p *tTransportFactory) GetTransport(trans TTransport) TTransport { // 简单的把输入变成输出
 	return trans
 }
 
-func NewTTransportFactory() TTransportFactory {
+func NewTTransportFactory() TTransportFactory { // 创建一个新的transportfactory
 	return &tTransportFactory{}
 }

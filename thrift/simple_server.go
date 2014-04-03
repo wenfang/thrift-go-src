@@ -40,7 +40,7 @@ func NewTSimpleServer2(processor TProcessor, serverTransport TServerTransport) *
 }
 
 func NewTSimpleServer4(processor TProcessor, serverTransport TServerTransport, transportFactory TTransportFactory, protocolFactory TProtocolFactory) *TSimpleServer {
-	return NewTSimpleServerFactory4(NewTProcessorFactory(processor),
+	return NewTSimpleServerFactory4(NewTProcessorFactory(processor), // 默认用NewTProcessorFactory包装
 		serverTransport,
 		transportFactory,
 		protocolFactory,
@@ -141,8 +141,8 @@ func (p *TSimpleServer) Stop() error { // 停止server
 
 func (p *TSimpleServer) processRequest(client TTransport) error {
 	processor := p.processorFactory.GetProcessor(client)
-	inputTransport := p.inputTransportFactory.GetTransport(client)
-	outputTransport := p.outputTransportFactory.GetTransport(client)
+	inputTransport := p.inputTransportFactory.GetTransport(client) // 获得输入的transport
+	outputTransport := p.outputTransportFactory.GetTransport(client) // 获得输出的transport
 	inputProtocol := p.inputProtocolFactory.GetProtocol(inputTransport)
 	outputProtocol := p.outputProtocolFactory.GetProtocol(outputTransport)
 	if inputTransport != nil {

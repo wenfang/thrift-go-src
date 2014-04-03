@@ -21,7 +21,7 @@ package thrift
 
 // A processor is a generic object which operates upon an input stream and
 // writes to some output stream.
-type TProcessor interface {
+type TProcessor interface { // TProcessor接口，thrift生成的程序构造TProcessor的实现
 	Process(in, out TProtocol) (bool, TException)
 }
 

@@ -25,7 +25,7 @@ import (
 )
 
 type TServerSocket struct { // 服务端socket，实现了TServerTransport接口
-	listener      net.Listener
+	listener      net.Listener  // 监听的Listener结构
 	addr          net.Addr      // 网络监听地址
 	clientTimeout time.Duration // 客户端超时时间
 	interrupted   bool          // 标志位，当置位时表示应该打断当前堵塞的accept和listen
@@ -47,7 +47,7 @@ func (p *TServerSocket) Listen() error { // 启动Listen
 	if p.IsListening() {
 		return nil
 	}
-	l, err := net.Listen(p.addr.Network(), p.addr.String())
+	l, err := net.Listen(p.addr.Network(), p.addr.String()) // 开始执行监听
 	if err != nil {
 		return err
 	}
@@ -62,11 +62,11 @@ func (p *TServerSocket) Accept() (TTransport, error) {
 	if p.listener == nil {
 		return nil, NewTTransportException(NOT_OPEN, "No underlying server socket")
 	}
-	conn, err := p.listener.Accept()
+	conn, err := p.listener.Accept() // 接收新请求，返回conn结构
 	if err != nil {
 		return nil, NewTTransportExceptionFromError(err)
 	}
-	return NewTSocketFromConnTimeout(conn, p.clientTimeout), nil
+	return NewTSocketFromConnTimeout(conn, p.clientTimeout), nil // 创建对应客户端的TSocket
 }
 
 // Checks whether the socket is listening.
@@ -87,7 +87,7 @@ func (p *TServerSocket) Open() error {
 	return nil
 }
 
-func (p *TServerSocket) Addr() net.Addr {
+func (p *TServerSocket) Addr() net.Addr { // 获取TServerSocket的地址
 	return p.addr
 }
 

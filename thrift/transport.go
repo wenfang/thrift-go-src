@@ -31,7 +31,7 @@ type Flusher interface {
 }
 
 // Encapsulates the I/O layer
-type TTransport interface { // transport接口
+type TTransport interface { // transport接口，在客户端代表client连接，在server端代表连接上的socket
 	io.ReadWriteCloser
 	Flusher
 
