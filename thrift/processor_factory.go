@@ -22,14 +22,14 @@ package thrift
 // The default processor factory just returns a singleton
 // instance.
 type TProcessorFactory interface { // TProcessorFactory的接口
-	GetProcessor(trans TTransport) TProcessor
+	GetProcessor(trans TTransport) TProcessor // 返回一个Processor
 }
 
 type tProcessorFactory struct { // 包含一个TProcessor
 	processor TProcessor
 }
 
-func NewTProcessorFactory(p TProcessor) TProcessorFactory {
+func NewTProcessorFactory(p TProcessor) TProcessorFactory { // 只包含一个process的Factory
 	return &tProcessorFactory{processor: p}
 }
 

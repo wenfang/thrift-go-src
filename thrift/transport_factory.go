@@ -23,7 +23,7 @@ package thrift
 // This is used primarily in servers, which get Transports from
 // a ServerTransport and then may want to mutate them (i.e. create
 // a BufferedTransport from the underlying base transport)
-type TTransportFactory interface {
+type TTransportFactory interface { // transport factory取回一个Transport
 	GetTransport(trans TTransport) TTransport
 }
 

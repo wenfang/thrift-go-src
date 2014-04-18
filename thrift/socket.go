@@ -24,17 +24,17 @@ import (
 	"time"
 )
 
-type TSocket struct { // TSocket结构代表client端socket连接
-	conn    net.Conn
-	addr    net.Addr
-	timeout time.Duration
+type TSocket struct { // TSocket结构代表client端socket连接，实现了TTransport接口
+	conn    net.Conn      // 底层网络连接
+	addr    net.Addr      // 底层网络地址
+	timeout time.Duration // 超时时间
 }
 
 // NewTSocket creates a net.Conn-backed TTransport, given a host and port
 //
 // Example:
 // 	trans, err := thrift.NewTSocket("localhost:9090")
-func NewTSocket(hostPort string) (*TSocket, error) {
+func NewTSocket(hostPort string) (*TSocket, error) { // 创建一个客户端TSocket
 	return NewTSocketTimeout(hostPort, 0)
 }
 
@@ -80,7 +80,7 @@ func (p *TSocket) pushDeadline(read, write bool) {
 }
 
 // Connects the socket, creating a new socket object if necessary.
-func (p *TSocket) Open() error {
+func (p *TSocket) Open() error { // 打开连接
 	if p.IsOpen() {
 		return NewTTransportException(ALREADY_OPEN, "Socket already connected.")
 	}

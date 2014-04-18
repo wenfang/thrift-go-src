@@ -28,8 +28,8 @@ type TServer interface { // server接口
 	OutputProtocolFactory() TProtocolFactory
 
 	// Starts the server
-	Serve() error
+	Serve() error // 启动Server
 	// Stops the server. This is optional on a per-implementation basis. Not
 	// all servers are required to be cleanly stoppable.
-	Stop() error
+	Stop() error // 停止Server
 }

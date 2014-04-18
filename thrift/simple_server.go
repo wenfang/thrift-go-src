@@ -139,9 +139,9 @@ func (p *TSimpleServer) Stop() error { // 停止server
 	return nil
 }
 
-func (p *TSimpleServer) processRequest(client TTransport) error {
-	processor := p.processorFactory.GetProcessor(client)
-	inputTransport := p.inputTransportFactory.GetTransport(client) // 获得输入的transport
+func (p *TSimpleServer) processRequest(client TTransport) error { // 处理客户端的请求
+	processor := p.processorFactory.GetProcessor(client)             // 获得Processor
+	inputTransport := p.inputTransportFactory.GetTransport(client)   // 获得输入的transport
 	outputTransport := p.outputTransportFactory.GetTransport(client) // 获得输出的transport
 	inputProtocol := p.inputProtocolFactory.GetProtocol(inputTransport)
 	outputProtocol := p.outputProtocolFactory.GetProtocol(outputTransport)
@@ -152,7 +152,7 @@ func (p *TSimpleServer) processRequest(client TTransport) error {
 		defer outputTransport.Close()
 	}
 	for {
-		ok, err := processor.Process(inputProtocol, outputProtocol)
+		ok, err := processor.Process(inputProtocol, outputProtocol) // 执行processor的Process
 		if err, ok := err.(TTransportException); ok && err.TypeId() == END_OF_FILE {
 			return nil
 		} else if err != nil {

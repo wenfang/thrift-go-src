@@ -26,7 +26,7 @@ import (
 
 var errTransportInterrupted = errors.New("Transport Interrupted")
 
-type Flusher interface {
+type Flusher interface { // 只实现一个Flush方法
 	Flush() (err error)
 }
 

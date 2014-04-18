@@ -51,7 +51,7 @@ func (p *TServerSocket) Listen() error { // 启动Listen
 	if err != nil {
 		return err
 	}
-	p.listener = l
+	p.listener = l // 设置Listener结构
 	return nil
 }
 
@@ -91,7 +91,7 @@ func (p *TServerSocket) Addr() net.Addr { // 获取TServerSocket的地址
 	return p.addr
 }
 
-func (p *TServerSocket) Close() error {
+func (p *TServerSocket) Close() error { // 关闭TServerSocket
 	defer func() {
 		p.listener = nil
 	}()
