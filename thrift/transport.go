@@ -36,7 +36,7 @@ type TTransport interface { // transport接口，在客户端代表client连接�
 	Flusher
 
 	// Opens the transport for communication
-	Open() error
+	Open() error  // 为通讯打开transport
 
 	// Returns true if the transport is open
 	IsOpen() bool

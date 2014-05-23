@@ -40,7 +40,7 @@ func NewTSocket(hostPort string) (*TSocket, error) { // 创建一个客户端TSo
 
 // NewTSocketTimeout creates a net.Conn-backed TTransport, given a host and port
 // it also accepts a timeout as a time.Duration
-func NewTSocketTimeout(hostPort string, timeout time.Duration) (*TSocket, error) {
+func NewTSocketTimeout(hostPort string, timeout time.Duration) (*TSocket, error) { // 创建一个客户端TSocket加入超时
 	//conn, err := net.DialTimeout(network, address, timeout)
 	addr, err := net.ResolveTCPAddr("tcp", hostPort)
 	if err != nil {
@@ -50,7 +50,7 @@ func NewTSocketTimeout(hostPort string, timeout time.Duration) (*TSocket, error)
 }
 
 // Creates a TSocket from a net.Addr
-func NewTSocketFromAddrTimeout(addr net.Addr, timeout time.Duration) *TSocket {
+func NewTSocketFromAddrTimeout(addr net.Addr, timeout time.Duration) *TSocket { 
 	return &TSocket{addr: addr, timeout: timeout}
 }
 
@@ -60,7 +60,7 @@ func NewTSocketFromConnTimeout(conn net.Conn, timeout time.Duration) *TSocket {
 }
 
 // Sets the socket timeout
-func (p *TSocket) SetTimeout(timeout time.Duration) error {
+func (p *TSocket) SetTimeout(timeout time.Duration) error { // 设置超时时间
 	p.timeout = timeout
 	return nil
 }
@@ -101,7 +101,7 @@ func (p *TSocket) Open() error { // 打开连接
 }
 
 // Retreive the underlying net.Conn
-func (p *TSocket) Conn() net.Conn {
+func (p *TSocket) Conn() net.Conn { // 取回底层的网络连接
 	return p.conn
 }
 
