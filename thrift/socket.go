@@ -50,7 +50,7 @@ func NewTSocketTimeout(hostPort string, timeout time.Duration) (*TSocket, error)
 }
 
 // Creates a TSocket from a net.Addr
-func NewTSocketFromAddrTimeout(addr net.Addr, timeout time.Duration) *TSocket { 
+func NewTSocketFromAddrTimeout(addr net.Addr, timeout time.Duration) *TSocket {
 	return &TSocket{addr: addr, timeout: timeout}
 }
 

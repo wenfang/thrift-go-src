@@ -35,7 +35,7 @@ type tFramedTransportFactory struct {
 	factory TTransportFactory
 }
 
-func NewTFramedTransportFactory(factory TTransportFactory) TTransportFactory {
+func NewTFramedTransportFactory(factory TTransportFactory) TTransportFactory { // 用framed包装TTransportFactory
 	return &tFramedTransportFactory{factory: factory}
 }
 

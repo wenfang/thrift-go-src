@@ -27,7 +27,7 @@ import (
 type TSimpleServer struct {
 	stopped bool
 
-	processorFactory       TProcessorFactory
+	processorFactory       TProcessorFactory // Processor的Factory
 	serverTransport        TServerTransport // server端的transport
 	inputTransportFactory  TTransportFactory
 	outputTransportFactory TTransportFactory

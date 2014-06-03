@@ -102,7 +102,7 @@ type TCompactProtocol struct {
 }
 
 // Create a TCompactProtocol given a TTransport
-func NewTCompactProtocol(trans TTransport) *TCompactProtocol {
+func NewTCompactProtocol(trans TTransport) *TCompactProtocol { // 新创建一个Compact协议
 	return &TCompactProtocol{trans: trans, lastField: []int{}}
 }
 

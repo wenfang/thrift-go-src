@@ -24,7 +24,7 @@ package thrift
 // a ServerTransport and then may want to mutate them (i.e. create
 // a BufferedTransport from the underlying base transport)
 type TTransportFactory interface { // transport factory取回一个Transport
-	GetTransport(trans TTransport) TTransport
+	GetTransport(trans TTransport) TTransport // 获取一个Transport
 }
 
 type tTransportFactory struct{}
