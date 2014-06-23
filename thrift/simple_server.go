@@ -28,7 +28,7 @@ type TSimpleServer struct {
 	stopped bool
 
 	processorFactory       TProcessorFactory // Processor的Factory
-	serverTransport        TServerTransport // server端的transport
+	serverTransport        TServerTransport  // server端的transport
 	inputTransportFactory  TTransportFactory
 	outputTransportFactory TTransportFactory
 	inputProtocolFactory   TProtocolFactory

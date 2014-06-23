@@ -20,10 +20,10 @@
 package thrift
 
 type TServer interface { // server接口
-	ProcessorFactory() TProcessorFactory // 返回TProcessorFactory
-	ServerTransport() TServerTransport  // 返回TServerTransport
-	InputTransportFactory() TTransportFactory
-	OutputTransportFactory() TTransportFactory
+	ProcessorFactory() TProcessorFactory       // 返回TProcessorFactory
+	ServerTransport() TServerTransport         // 返回TServerTransport
+	InputTransportFactory() TTransportFactory  // 返回输入的TransportFactory
+	OutputTransportFactory() TTransportFactory // 返回输出的TransportFactory
 	InputProtocolFactory() TProtocolFactory
 	OutputProtocolFactory() TProtocolFactory
 
